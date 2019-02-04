@@ -5,6 +5,7 @@
   "author": "Yuichi Saito <munisystem@gmail.com>",
   "description": "A simple helpful robot for your Company",
   "dependencies": {
+    "@slack/client": "^4.8.0",
     "hubot": "^3.2.0",
     "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",
