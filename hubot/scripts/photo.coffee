@@ -6,15 +6,14 @@ filename = "photo.jpg"
 
 module.exports = (robot) ->
   web = new WebClient robot.adapter.options.token
-  console.log(process.cwd())
 
   robot.hear /写真/i, (res) ->
-    exec("fswebcam -r 1280x960 --no-info --no-overlay --no-timestamp --no-banner --jpeg 95q /tmp/photo.jpg")
+    exec("fswebcam -r 1280x960 --no-info --no-overlay --no-timestamp --no-banner --jpeg 95q /tmp/#{filename}")
       .then (result) ->
         web.files.upload({
           filename: filename,
           title: filename,
-          file: fs.createReadStream("/tmp/photo.jpg"),
+          file: fs.createReadStream("/tmp/#{filename}"),
           channels: res.message.room
         })
           .then (resp) ->
