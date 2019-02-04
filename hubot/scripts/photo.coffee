@@ -1,5 +1,5 @@
 fs = require "fs"
-exec = require('child_process').exec;
+exec = require('child-process-promise').exec;
 {WebClient} = require "@slack/client"
 
 filename = "photo.jpg"
@@ -10,7 +10,7 @@ module.exports = (robot) ->
 
   robot.hear /写真/i, (res) ->
     exec("fswebcam -r 1280x960 --no-info --no-overlay --no-timestamp --no-banner --jpeg 95q /tmp/photo.jpg")
-      .then () ->
+      .then (result) ->
         web.files.upload({
           filename: filename,
           title: filename,
@@ -22,4 +22,4 @@ module.exports = (robot) ->
           .catch (error) ->
             res.send error.message
       .catch (error) ->
-        robot.logger.debug "Received message #{resp.file.id}"
+        robot.logger.debug "#{error}"
