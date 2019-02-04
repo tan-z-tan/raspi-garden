@@ -1,7 +1,7 @@
 fs = require "fs"
 {WebClient} = require "@slack/client"
 
-filename = "lena.png"
+filename = "screenshot.jpg"
 
 module.exports = (robot) ->
   web = new WebClient robot.adapter.options.token
@@ -11,7 +11,7 @@ module.exports = (robot) ->
     web.files.upload({
       filename: filename,
       title: filename,
-      file: fs.createReadStream("/tmp/lena.png"),
+      file: fs.createReadStream("/tmp/screenshot.jpg"),
       channels: res.message.room
     })
       .then (resp) ->
